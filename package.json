@@ -1,0 +1,22 @@
+{
+  "name": "ccms",
+  "version": "1.0.0",
+  "description": "Common club management system",
+  "main": "./src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tushar-c23/ccms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tushar-c23/ccms/issues"
+  },
+  "homepage": "https://github.com/tushar-c23/ccms#readme"
+}
