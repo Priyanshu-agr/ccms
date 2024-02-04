@@ -94,7 +94,6 @@ ALTER TABLE "attendance" ADD FOREIGN KEY ("enrollment_number") REFERENCES "stude
 
 ALTER TABLE "attendance" ADD FOREIGN KEY ("event_id") REFERENCES "events" ("event_id");
 
---ALTER TABLE "students" ADD FOREIGN KEY ("enrollment_number") REFERENCES "clubs" ("club_president");
 alter table "clubs" add foreign key ("club_president") references "students" ("enrollment_number");
 
 alter table "clubs" add foreign key ("club_vicepresident") references "students" ("enrollment_number");
@@ -102,12 +101,6 @@ alter table "clubs" add foreign key ("club_vicepresident") references "students"
 alter table "clubs" add foreign key ("club_treasurer") references "students" ("enrollment_number");
 
 alter table "clubs" add foreign key ("club_secretary") references "students" ("enrollment_number");
-
---ALTER TABLE "students" ADD FOREIGN KEY ("enrollment_number") REFERENCES "clubs" ("club_vicepresident");
-
---ALTER TABLE "students" ADD FOREIGN KEY ("enrollment_number") REFERENCES "clubs" ("club_treasurer");
-
---ALTER TABLE "students" ADD FOREIGN KEY ("enrollment_number") REFERENCES "clubs" ("club_secretary");
 
 ALTER TABLE "clubs" ADD FOREIGN KEY ("club_mentor") REFERENCES "faculties" ("faculty_id");
 
