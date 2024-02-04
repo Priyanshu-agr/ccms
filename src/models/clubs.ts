@@ -1,5 +1,6 @@
 import {pgTable, serial, text, varchar, boolean, integer} from "drizzle-orm/pg-core";
 import { students } from "./students";
+import { faculties } from "./faculties";
 
 export const clubs = pgTable('clubs',{
     id: serial('club_id').primaryKey(),
@@ -7,7 +8,7 @@ export const clubs = pgTable('clubs',{
     description: text('club_description'),
     tableName: varchar('table_name'),
     isTechnical: boolean('is_technical'),
-    mentor: varchar('club_mentor'),
+    mentor: varchar('club_mentor').references(() => faculties.id),
     president: varchar('club_president').references(() => students.enrollmentNumber),
     vicePresident: varchar('club_vice_president').references(() => students.enrollmentNumber),
     secretary: varchar('club_secretary').references(() => students.enrollmentNumber),
