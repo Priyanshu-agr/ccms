@@ -4,7 +4,7 @@ import { clubs } from "./clubs";
 export const events = pgTable('events', {
     id: serial('event_id').primaryKey(),
     clubId: serial('club_id').references(() => clubs.id),
-    title: varchar('event_title'),
+    title: varchar('event_title').notNull(),
     description: text('event_description'),
     date: date('event_date'),
     time: time('event_time'),

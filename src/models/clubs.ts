@@ -4,11 +4,11 @@ import { faculties } from "./faculties";
 
 export const clubs = pgTable('clubs',{
     id: serial('club_id').primaryKey(),
-    name: varchar('club_name'),
+    name: varchar('club_name').notNull(),
     description: text('club_description'),
-    tableName: varchar('table_name'),
-    isTechnical: boolean('is_technical'),
-    mentor: varchar('club_mentor').references(() => faculties.id),
+    tableName: varchar('table_name').notNull(),
+    isTechnical: boolean('is_technical').notNull(),
+    mentor: serial('club_mentor').references(() => faculties.id),
     president: varchar('club_president').references(() => students.enrollmentNumber),
     vicePresident: varchar('club_vice_president').references(() => students.enrollmentNumber),
     secretary: varchar('club_secretary').references(() => students.enrollmentNumber),

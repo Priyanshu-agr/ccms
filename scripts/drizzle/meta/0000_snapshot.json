@@ -1,5 +1,5 @@
 {
-  "id": "654b8535-c6d7-4bb0-8cd0-e58e07ffc1d9",
+  "id": "f81fee64-ea66-484a-95a2-27d5254cbc3f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -427,13 +427,13 @@
         },
         "in_club_as_team": {
           "name": "in_club_as_team",
-          "type": "varchar",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": false
         },
         "in_club_as_member": {
           "name": "in_club_as_member",
-          "type": "varchar",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": false
         }

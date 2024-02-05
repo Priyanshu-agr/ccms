@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS "students" (
 	"credits" integer,
 	"cis_id" varchar,
 	"password" varchar,
-	"in_club_as_team" varchar,
-	"in_club_as_member" varchar
+	"in_club_as_team" text[],
+	"in_club_as_member" text[]
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "volt" (
