@@ -1,5 +1,17 @@
 create type clubs_enum as enum ('cold','gdsc','loop','volt','derobotica');
 
+CREATE TYPE _clubs_enum (
+	INPUT = array_in,
+	OUTPUT = array_out,
+	RECEIVE = array_recv,
+	SEND = array_send,
+	ANALYZE = array_typanalyze,
+	ALIGNMENT = 4,
+	STORAGE = any,
+	CATEGORY = A,
+	ELEMENT = clubs_enum,
+	DELIMITER = ',');
+
 CREATE TABLE "students" (
   "enrollment_number" varchar(9) PRIMARY KEY,
   "first_name" text,
@@ -7,8 +19,8 @@ CREATE TABLE "students" (
   "credit" int,
   "cis_id" varchar,
   "password" varchar,
-  "in_clubteam" clubs_enum,
-  "in_clubmember" clubs_enum
+  "in_clubteam" _clubs_enum,
+  "in_clubmember" _clubs_enum
 );
 
 create type club_roles_enum as enum ('President','Vice President','Treasurer','Secretary','Executive','Member');
