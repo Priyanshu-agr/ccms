@@ -9,9 +9,9 @@ export const clubs = pgTable('clubs',{
     tableName: varchar('table_name').notNull(),
     isTechnical: boolean('is_technical').notNull(),
     mentor: serial('club_mentor').references(() => faculties.id),
-    president: varchar('club_president').references(() => students.enrollmentNumber),
-    vicePresident: varchar('club_vice_president').references(() => students.enrollmentNumber),
-    secretary: varchar('club_secretary').references(() => students.enrollmentNumber),
-    treasurer: varchar('club_treasurer').references(() => students.enrollmentNumber),
+    president: varchar('club_president', { length: 9 }).references(() => students.enrollmentNumber),
+    vicePresident: varchar('club_vice_president', { length: 9 }).references(() => students.enrollmentNumber),
+    secretary: varchar('club_secretary', { length: 9 }).references(() => students.enrollmentNumber),
+    treasurer: varchar('club_treasurer', { length: 9 }).references(() => students.enrollmentNumber),
     eventCount: integer('event_count'),
 });

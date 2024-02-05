@@ -1,5 +1,5 @@
 {
-  "id": "f81fee64-ea66-484a-95a2-27d5254cbc3f",
+  "id": "05631a35-7d50-4f40-a048-fe14c843c891",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -18,7 +18,7 @@
           "name": "enrollment_number",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "checked_in": {
           "name": "checked_in",
@@ -56,7 +56,15 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "attendance_event_id_enrollment_number_pk": {
+          "name": "attendance_event_id_enrollment_number_pk",
+          "columns": [
+            "event_id",
+            "enrollment_number"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     },
     "clubs": {
@@ -73,7 +81,7 @@
           "name": "club_name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "club_description": {
           "name": "club_description",
@@ -85,13 +93,13 @@
           "name": "table_name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "is_technical": {
           "name": "is_technical",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "club_mentor": {
           "name": "club_mentor",
@@ -101,25 +109,25 @@
         },
         "club_president": {
           "name": "club_president",
-          "type": "varchar",
+          "type": "varchar(9)",
           "primaryKey": false,
           "notNull": false
         },
         "club_vice_president": {
           "name": "club_vice_president",
-          "type": "varchar",
+          "type": "varchar(9)",
           "primaryKey": false,
           "notNull": false
         },
         "club_secretary": {
           "name": "club_secretary",
-          "type": "varchar",
+          "type": "varchar(9)",
           "primaryKey": false,
           "notNull": false
         },
         "club_treasurer": {
           "name": "club_treasurer",
-          "type": "varchar",
+          "type": "varchar(9)",
           "primaryKey": false,
           "notNull": false
         },
@@ -219,9 +227,10 @@
         },
         "club_credits": {
           "name": "club_credits",
-          "type": "varchar",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": 0
         }
       },
       "indexes": {},
@@ -249,7 +258,7 @@
           "name": "event_title",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "event_description": {
           "name": "event_description",
@@ -321,7 +330,7 @@
           "name": "faculty_name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -347,9 +356,10 @@
         },
         "club_credits": {
           "name": "club_credits",
-          "type": "varchar",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": 0
         }
       },
       "indexes": {},
@@ -375,9 +385,10 @@
         },
         "club_credits": {
           "name": "club_credits",
-          "type": "varchar",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": 0
         }
       },
       "indexes": {},
@@ -399,7 +410,7 @@
           "name": "first_name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "last_name": {
           "name": "last_name",
@@ -411,7 +422,8 @@
           "name": "credits",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": 0
         },
         "cis_id": {
           "name": "cis_id",
@@ -427,13 +439,13 @@
         },
         "in_club_as_team": {
           "name": "in_club_as_team",
-          "type": "text[]",
+          "type": "clubs_enum[]",
           "primaryKey": false,
           "notNull": false
         },
         "in_club_as_member": {
           "name": "in_club_as_member",
-          "type": "text[]",
+          "type": "clubs_enum[]",
           "primaryKey": false,
           "notNull": false
         }
@@ -461,9 +473,10 @@
         },
         "club_credits": {
           "name": "club_credits",
-          "type": "varchar",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": 0
         }
       },
       "indexes": {},
@@ -482,6 +495,15 @@
         "treasurer": "treasurer",
         "member": "member",
         "executive": "executive"
+      }
+    },
+    "clubs_enum": {
+      "name": "clubs_enum",
+      "values": {
+        "cold": "cold",
+        "loop": "loop",
+        "gdsc": "gdsc",
+        "volt": "volt"
       }
     }
   },

@@ -1,20 +1,6 @@
-import {pgTable, varchar, integer, customType, text} from "drizzle-orm/pg-core";
+import {pgTable, varchar, integer, customType, text, pgEnum} from "drizzle-orm/pg-core";
 
-enum clubs {
-    "cold",
-    "gdsc",
-    "loop",
-    "volt",
-    "derobotica"
-};
-
-type _clubs = Array<clubs>;
-
-const clubsEnum = customType<{data: clubs}>({
-    dataType() {
-        return 'clubs';
-    },
-});
+export const clubsEnum = pgEnum('clubs_enum', ['cold', 'loop', 'gdsc', 'volt']);
 
 export const students = pgTable('students', {
     enrollmentNumber: varchar('enrollment_number', { length: 9 }).primaryKey(),
@@ -23,7 +9,7 @@ export const students = pgTable('students', {
     credits: integer('credits').default(0),
     cisId: varchar('cis_id'),
     password: varchar('password'),
-    inClubTeam: text('in_club_as_team').array(),
-    inClubMember: text('in_club_as_member').array()
+    inClubTeam: clubsEnum('in_club_as_team').array(),
+    inClubMember: clubsEnum('in_club_as_member').array()
 });
 
