@@ -126,7 +126,31 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
+ ALTER TABLE "cold" ADD CONSTRAINT "cold_enrollment_number_students_enrollment_number_fk" FOREIGN KEY ("enrollment_number") REFERENCES "students"("enrollment_number") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
  ALTER TABLE "events" ADD CONSTRAINT "events_club_id_clubs_club_id_fk" FOREIGN KEY ("club_id") REFERENCES "clubs"("club_id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "gdsc" ADD CONSTRAINT "gdsc_enrollment_number_students_enrollment_number_fk" FOREIGN KEY ("enrollment_number") REFERENCES "students"("enrollment_number") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "loop" ADD CONSTRAINT "loop_enrollment_number_students_enrollment_number_fk" FOREIGN KEY ("enrollment_number") REFERENCES "students"("enrollment_number") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "volt" ADD CONSTRAINT "volt_enrollment_number_students_enrollment_number_fk" FOREIGN KEY ("enrollment_number") REFERENCES "students"("enrollment_number") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

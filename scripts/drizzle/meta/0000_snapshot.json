@@ -1,5 +1,5 @@
 {
-  "id": "05631a35-7d50-4f40-a048-fe14c843c891",
+  "id": "dd191b67-e36f-4e6a-9ad5-ae2a67d7836e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -234,7 +234,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "cold_enrollment_number_students_enrollment_number_fk": {
+          "name": "cold_enrollment_number_students_enrollment_number_fk",
+          "tableFrom": "cold",
+          "tableTo": "students",
+          "columnsFrom": [
+            "enrollment_number"
+          ],
+          "columnsTo": [
+            "enrollment_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -363,7 +377,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "gdsc_enrollment_number_students_enrollment_number_fk": {
+          "name": "gdsc_enrollment_number_students_enrollment_number_fk",
+          "tableFrom": "gdsc",
+          "tableTo": "students",
+          "columnsFrom": [
+            "enrollment_number"
+          ],
+          "columnsTo": [
+            "enrollment_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -392,7 +420,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "loop_enrollment_number_students_enrollment_number_fk": {
+          "name": "loop_enrollment_number_students_enrollment_number_fk",
+          "tableFrom": "loop",
+          "tableTo": "students",
+          "columnsFrom": [
+            "enrollment_number"
+          ],
+          "columnsTo": [
+            "enrollment_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -480,7 +522,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "volt_enrollment_number_students_enrollment_number_fk": {
+          "name": "volt_enrollment_number_students_enrollment_number_fk",
+          "tableFrom": "volt",
+          "tableTo": "students",
+          "columnsFrom": [
+            "enrollment_number"
+          ],
+          "columnsTo": [
+            "enrollment_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     }
