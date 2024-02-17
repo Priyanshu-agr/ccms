@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Attendance {
+  event_id          Int      @default(autoincrement())
+  enrollment_number String   @db.VarChar
+  checked_in        Boolean?
+  students          Student  @relation(fields: [enrollment_number], references: [enrollment_number], onDelete: NoAction, onUpdate: NoAction, map: "attendance_enrollment_number_students_enrollment_number_fk")
+  events            Event    @relation(fields: [event_id], references: [event_id], onDelete: NoAction, onUpdate: NoAction, map: "attendance_event_id_events_event_id_fk")
+
+  @@id([event_id, enrollment_number], map: "attendance_event_id_enrollment_number_pk")
+  @@map("attendance")
+}
+
+model Club {
+  club_id                                      Int          @id @default(autoincrement())
+  club_name                                    String       @db.VarChar
+  club_description                             String?
+  is_technical                                 Boolean
+  club_mentor                                  Int          @default(autoincrement()) //should it be auto-increment?
+  club_president                               String?      @db.VarChar(9)
+  club_vice_president                          String?      @db.VarChar(9)
+  club_secretary                               String?      @db.VarChar(9)
+  club_treasurer                               String?      @db.VarChar(9)
+  event_count                                  Int?
+  faculties                                    Faculty      @relation(fields: [club_mentor], references: [faculty_id], onDelete: NoAction, onUpdate: NoAction, map: "clubs_club_mentor_faculties_faculty_id_fk")
+  students_clubs_club_presidentTostudents      Student?     @relation("clubs_club_presidentTostudents", fields: [club_president], references: [enrollment_number], onDelete: NoAction, onUpdate: NoAction, map: "clubs_club_president_students_enrollment_number_fk")
+  students_clubs_club_secretaryTostudents      Student?     @relation("clubs_club_secretaryTostudents", fields: [club_secretary], references: [enrollment_number], onDelete: NoAction, onUpdate: NoAction, map: "clubs_club_secretary_students_enrollment_number_fk")
+  students_clubs_club_treasurerTostudents      Student?     @relation("clubs_club_treasurerTostudents", fields: [club_treasurer], references: [enrollment_number], onDelete: NoAction, onUpdate: NoAction, map: "clubs_club_treasurer_students_enrollment_number_fk")
+  students_clubs_club_vice_presidentTostudents Student?     @relation("clubs_club_vice_presidentTostudents", fields: [club_vice_president], references: [enrollment_number], onDelete: NoAction, onUpdate: NoAction, map: "clubs_club_vice_president_students_enrollment_number_fk")
+  events                                       Event[] //what is this?
+  membership                                   Membership[]
+
+  @@map("clubs")
+}
+
+model Event {
+  event_id          Int          @id @default(autoincrement())
+  club_id           Int          @default(autoincrement()) //auto-increment?
+  event_title       String       @db.VarChar
+  event_description String?
+  event_date        DateTime?    @db.Date
+  event_time        DateTime?    @db.Time(6)
+  event_location    String?      @db.VarChar
+  created_on        DateTime?    @db.Timestamp(6)
+  last_modified_on  DateTime?    @db.Timestamp(6)
+  created_by        String?      @db.VarChar(9)
+  attendance        Attendance[] //what?
+  clubs             Club         @relation(fields: [club_id], references: [club_id], onDelete: NoAction, onUpdate: NoAction, map: "events_club_id_clubs_club_id_fk")
+  student           Student?     @relation(fields: [created_by], references: [enrollment_number], onDelete: NoAction, onUpdate: NoAction, map: "events_created_by_students_enrollment_number_fk")
+  speakers           EventToSpeaker[]
+
+  @@map("events")
+}
+
+model Faculty {
+  faculty_id   Int    @id @default(autoincrement())
+  faculty_name String @db.VarChar
+  clubs        Club[]
+
+  @@map("faculties")
+}
+
+model Student {
+  enrollment_number                         String       @id @db.VarChar(9)
+  first_name                                String       @db.VarChar
+  last_name                                 String?      @db.VarChar
+  credits                                   Int?         @default(0)
+  cis_id                                    String?      @db.VarChar
+  password                                  String?      @db.VarChar
+  in_club_as_team                           clubs_enum[]
+  in_club_as_member                         clubs_enum[]
+  attendance                                Attendance[]
+  clubs_clubs_club_presidentTostudents      Club[]       @relation("clubs_club_presidentTostudents")
+  clubs_clubs_club_secretaryTostudents      Club[]       @relation("clubs_club_secretaryTostudents")
+  clubs_clubs_club_treasurerTostudents      Club[]       @relation("clubs_club_treasurerTostudents")
+  clubs_clubs_club_vice_presidentTostudents Club[]       @relation("clubs_club_vice_presidentTostudents")
+  events                                    Event[]
+  membership                                Membership[]
+
+  @@map("students")
+}
+
+model Membership {
+  enrollment_number String     @db.VarChar(9)
+  club_id           Int
+  club_credits      Int
+  club_role         club_roles
+  students          Student    @relation(fields: [enrollment_number], references: [enrollment_number], onDelete: NoAction, onUpdate: NoAction, map: "Membership_enrollment_number_students_enrollment_number_fk")
+  clubs             Club       @relation(fields: [club_id], references: [club_id], onDelete: NoAction, onUpdate: NoAction, map: "Membership_club_id_clubs_club_id_fk")
+
+  @@id([enrollment_number, club_id], map: "Membership_enrollment_number_club_id_pk")
+}
+
+model Speaker {
+  speaker_id   Int      @id @default(autoincrement())
+  speaker_name String   @db.VarChar
+  speaker_bio  String?  @db.VarChar
+  events       EventToSpeaker[]
+
+  @@map("speakers")
+}
+
+model EventToSpeaker {
+  event_id   Int
+  speaker_id Int
+  events     Event @relation(fields: [event_id], references: [event_id], onDelete: NoAction, onUpdate: NoAction, map: "eventToSpeaker_event_id_events_event_id_fk")
+  speakers   Speaker @relation(fields: [speaker_id], references: [speaker_id], onDelete: NoAction, onUpdate: NoAction, map: "eventToSpeaker_speaker_id_speakers_speaker_id_fk")
+
+  @@id([event_id, speaker_id], map: "eventToSpeaker_event_id_speaker_id_pk")
+  @@map("eventToSpeaker")
+}
+
+enum club_roles {
+  president
+  vice_president
+  secretary
+  treasurer
+  member
+  executive
+}
+
+enum clubs_enum {
+  cold
+  loop
+  gdsc
+  volt
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ccms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/tushar-c23/ccms.git",
+  "author": "tushar-c23 <tusharc.cse@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "5.9.1",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "prisma": "5.9.1",
+    "ts-node-dev": "^2.0.0"
+  }
+}
