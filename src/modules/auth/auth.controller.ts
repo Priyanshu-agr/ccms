@@ -40,7 +40,7 @@ async function authStudentLoginHandler(
         success: true,
         body : {
             message: 'Student login successful',
-            token: 'some-token' 
+            token: 'some-token'
         }
     });
 }
