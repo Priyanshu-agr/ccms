@@ -4,4 +4,10 @@ const enrollmentNumberAuthSchema = z.object({
     enrollmentNumber: z.string().length(12)
 })
 
+const studentLoginAuthSchema = z.object({
+    email: z.string().email(),
+    password: z.string()
+})
+
 export type EnrollmentNumberAuthSchemaInput = z.infer<typeof enrollmentNumberAuthSchema>;
+export type StudentLoginAuthSchemaInput = z.infer<typeof studentLoginAuthSchema>;

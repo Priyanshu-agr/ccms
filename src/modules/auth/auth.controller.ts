@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { EnrollmentNumberAuthSchemaInput } from "./auth.schema";
+import { EnrollmentNumberAuthSchemaInput, StudentLoginAuthSchemaInput } from "./auth.schema";
 
 async function authEnrollmentNumberHandler(
     request: FastifyRequest<{
@@ -16,13 +16,30 @@ async function authEnrollmentNumberHandler(
             return;
         }
 
-        response.code(200).send({ message: 'Enrollment number is valid please login' });
+        response.code(200).send({ 
+            message: 'Enrollment number is valid please login',
+            email: 'student_soe@jnu.ac.in' 
+        });
     } catch (error) {
         console.error('Error in authEnrollmentNumberHandler', error);
         response.code(500).send(error);
     }
 }
 
+async function authStudentLoginHandler(
+    request: FastifyRequest<{
+        Body: StudentLoginAuthSchemaInput
+    }>, 
+    response: FastifyReply
+) {
+    // This is a mock implementation of the handler all student logins are allowed we are not using the db service at all
+    response.code(200).send({ 
+        message: 'Student login successful',
+        token: 'some-token' 
+    });
+}
+
 export {
-    authEnrollmentNumberHandler
+    authEnrollmentNumberHandler,
+    authStudentLoginHandler
 }
