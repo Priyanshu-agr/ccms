@@ -16,9 +16,12 @@ async function authEnrollmentNumberHandler(
             return;
         }
 
-        response.code(200).send({ 
-            message: 'Enrollment number is valid please login',
-            email: 'student_soe@jnu.ac.in' 
+        response.code(200).send({
+            success: true,
+            body: {
+                message: 'Login',
+                email: 'student_soe@jnu.ac.in' 
+            }
         });
     } catch (error) {
         console.error('Error in authEnrollmentNumberHandler', error);
@@ -33,9 +36,12 @@ async function authStudentLoginHandler(
     response: FastifyReply
 ) {
     // This is a mock implementation of the handler all student logins are allowed we are not using the db service at all
-    response.code(200).send({ 
-        message: 'Student login successful',
-        token: 'some-token' 
+    response.code(200).send({
+        success: true,
+        body : {
+            message: 'Student login successful',
+            token: 'some-token' 
+        }
     });
 }
 
