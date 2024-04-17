@@ -6,11 +6,14 @@
   "author": "tushar-c23 <tusharc.cse@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts"
+    "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts",
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@fastify/swagger": "^6.0.0",
     "@prisma/client": "5.9.1",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "fastify-swagger": "^5.2.0",
     "fastify-zod": "^1.4.0",
