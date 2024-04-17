@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { EnrollmentNumberAuthSchemaInput, StudentLoginAuthSchemaInput } from "./auth.schema";
-import { lookupStudentByEnrollmentNumber } from "./auth.service";
+import { lookupStudentByEnrollmentNumber, studentLoginUsingEmailPassword } from "./auth.service";
 
 async function authEnrollmentNumberHandler(
     request: FastifyRequest<{
@@ -8,7 +8,6 @@ async function authEnrollmentNumberHandler(
     }>, 
     response: FastifyReply
 ) {
-    // This is a mock implementation of the handler all enrollment numbers are allowed to login we are not using the db service at all
     const body = request.body;
 
     try {
@@ -60,14 +59,43 @@ async function authStudentLoginHandler(
     }>, 
     response: FastifyReply
 ) {
-    // This is a mock implementation of the handler all student logins are allowed we are not using the db service at all
-    response.code(200).send({
-        success: true,
-        body : {
-            message: 'Student login successful',
-            token: 'some-token'
+    const body = request.body;
+
+    try {
+        if (!body.email) {
+            response.code(400).send({ error: 'Email is required' });
+            return;
         }
-    });
+        if (!body.password) {
+            response.code(400).send({ error: 'Password is required' });
+            return;
+        }
+
+        const student = await studentLoginUsingEmailPassword(body.email);
+
+        if (!student) {
+            response.code(404).send({ error: 'Student not found' });
+            return;
+        }
+
+        if(student.password !== body.password)
+        {
+            response.code(401).send({ error: 'Invalid password or id' });
+            return;
+        }
+        // upon successfull authentication need to generate an access token and store it somewhere and return it to the client
+        response.code(200).send({
+            success: true,
+            body : {
+                message: 'Student login successful',
+                token: 'some-token'
+            }
+        });
+    } catch (error) {
+        console.error('Error in authStudentLoginHandler', error);
+        response.code(500).send(error);
+    }
+
 }
 
 export {
