@@ -1,5 +1,10 @@
 import Fastify from "fastify";
 import authRoutes from "./modules/auth/auth.route";
+import prisma from "./utils/prisma";
+import * as dotenv from 'dotenv'
+import { lookupStudentByEnrollmentNumber } from "./modules/auth/auth.service";
+
+dotenv.config()
 
 const server = Fastify();
 

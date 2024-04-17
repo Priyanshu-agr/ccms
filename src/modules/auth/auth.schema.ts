@@ -1,7 +1,7 @@
 import {z} from 'zod';
 
 const enrollmentNumberAuthSchema = z.object({
-    enrollmentNumber: z.string().length(12)
+    enrollmentNumber: z.string().length(9)
 })
 
 const studentLoginAuthSchema = z.object({

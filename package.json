@@ -11,9 +11,11 @@
   "dependencies": {
     "@fastify/swagger": "^6.0.0",
     "@prisma/client": "5.9.1",
+    "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "fastify-swagger": "^5.2.0",
     "fastify-zod": "^1.4.0",
+    "postgres": "^3.4.4",
     "typescript": "^5.3.3",
     "zod": "^3.22.4"
   },
