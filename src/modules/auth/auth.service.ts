@@ -8,6 +8,15 @@ async function lookupStudentByEnrollmentNumber(enrollment_number: string) {
     });
 }
 
+async function studentLoginUsingEmailPassword(cis_id: string) {
+    return prisma.student.findFirst({
+        where: {
+            cis_id
+        }
+    });
+}
+
 export {
-    lookupStudentByEnrollmentNumber
+    lookupStudentByEnrollmentNumber,
+    studentLoginUsingEmailPassword
 }

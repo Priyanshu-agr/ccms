@@ -1095,6 +1095,11 @@ pino@^8.17.0:
     sonic-boom "^3.7.0"
     thread-stream "^2.0.0"
 
+postgres@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.npmjs.org/postgres/-/postgres-3.4.4.tgz"
+  integrity sha512-IbyN+9KslkqcXa8AO9fxpk97PA4pzewvpi2B3Dwy9u4zpV32QicaEdgmF3eSQUzdRk7ttDHQejNgAEr4XoeH4A==
+
 prisma@*, prisma@5.9.1:
   version "5.9.1"
   resolved "https://registry.npmjs.org/prisma/-/prisma-5.9.1.tgz"
