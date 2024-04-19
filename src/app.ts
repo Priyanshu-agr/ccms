@@ -9,7 +9,7 @@ dotenv.config()
 const server = Fastify();
 
 server.get('/healthcheck', async (request, response) => {
-    return {status: 'ok'};
+    response.code(200).send({status: 'ok'});
 })
 
 async function main() {
