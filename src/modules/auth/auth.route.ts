@@ -1,10 +1,9 @@
-import { FastifyInstance } from "fastify";
-import { authEnrollmentNumberHandler, authStudentLoginHandler } from "./auth.controller";
+import express from "express";
+import * as authController from "./auth.controller";
 
-async function authRoutes(server: FastifyInstance) {
+const router = express.Router();
 
-    server.post('/enrollmentNumber', authEnrollmentNumberHandler);
-    server.post('/studentLogin', authStudentLoginHandler);
-}
+router.post("/enrollmentNumber", authController.authEnrollmentNumberHandler);
+router.post("/studentLogin",authController.authStudentLoginHandler);
 
-export default authRoutes;
+export default router;
