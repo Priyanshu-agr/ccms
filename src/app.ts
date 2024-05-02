@@ -1,28 +1,19 @@
-import Fastify from "fastify";
+import express from "express";
 import authRoutes from "./modules/auth/auth.route";
 import prisma from "./utils/prisma";
-import * as dotenv from 'dotenv'
+import "dotenv/config"
 import { lookupStudentByEnrollmentNumber } from "./modules/auth/auth.service";
 
-dotenv.config()
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const server = Fastify();
+const port = process.env.PORT || 3000;
 
-server.get('/healthcheck', async (request, response) => {
-    response.code(200).send({status: 'ok'});
-})
+app.get("/healthcheck", async (req, res) => {
+    res.status(200).json({ status: "ok" });
+});
 
-async function main() {
-
-    server.register(authRoutes, {prefix: '/auth'});
-
-    try {
-        await server.listen({port: 3000});
-        console.log('Server started');
-    } catch (err) {
-        server.log.error(err);
-        process.exit(1);
-    }
-}
-
-main();
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});
