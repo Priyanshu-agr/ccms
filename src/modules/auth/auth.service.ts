@@ -33,8 +33,25 @@ async function studentSignupUsingEmailPassword(enrollment_number: string, cis_id
     return registerStudent;
 }
 
+async function studentMailVerified(enrollment_number: string, cis_id: string) {
+    const registerStudent = await prisma.student.update({
+        where: {
+            enrollment_number
+        },
+        data: {
+            cis_id
+        }
+    })
+
+    return registerStudent;
+}
+
 function generateAccessToken(username: string) {
     return jwt.sign( { username: username }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '1800s' })
+}
+
+function verifyAccessToken(token: string) {
+    return jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!);
 }
 
 async function generateHashedPassword(password: string) {
@@ -51,7 +68,10 @@ export {
     lookupStudentByEnrollmentNumber,
     studentLoginUsingEmailPassword,
     studentSignupUsingEmailPassword,
+    studentMailVerified,
     generateAccessToken,
+    verifyAccessToken,
     generateHashedPassword,
-    passwordCheck
+    passwordCheck,
+
 }
