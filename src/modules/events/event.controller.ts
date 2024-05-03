@@ -42,6 +42,7 @@ export const singleEvent = async (req: Request, res: Response) => {
 
 export const createEvent = async (req: Request, res: Response) => {
     try {
+        console.log(req.body);  
         const event = await prisma.event.create({
             data: req.body
         });
