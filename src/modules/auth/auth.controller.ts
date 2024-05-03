@@ -120,7 +120,17 @@ async function authStudentSignupHandler(
             response.status(404).send({ error: 'Student not found' });
             return;
         }
-        if (student.cis_id && student.password) {
+        if(!student.cis_id) {
+            response.status(400).send({ error: 'Student email not verified' });
+            return;
+        }
+
+        if(student.cis_id !== body.email) {
+            response.status(400).send({ error: 'Email incorrect' });
+            return;
+        }
+
+        if (student.password) {
             response.status(400).send({ error: 'Student already registered' });
             return;
         }
