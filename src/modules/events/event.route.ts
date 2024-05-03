@@ -11,7 +11,7 @@ router.get("/:eventId", eventController.singleEvent);
 
 router.post("/", validateRequestBody(eventSchema.createEventSchema), eventController.createEvent);
 
-router.put("/:eventId", eventController.updateEvent);
+router.put("/:eventId",validateRequestBody(eventSchema.createEventSchema), eventController.updateEvent);
 
 router.delete("/:eventId", eventController.deleteEvent);
 
