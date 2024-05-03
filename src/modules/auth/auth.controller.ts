@@ -213,7 +213,7 @@ async function authStudentSignupEmailVerificationHandler(
     const token = request.query.token as string;
 
     const decoded = verifyAccessToken(token);
-    
+
     if (!decoded) {
         response.status(401).send({ error: 'Unauthorized' });
         return;
