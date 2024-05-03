@@ -1,10 +1,10 @@
-import express from "express";
+import express, { Express } from "express";
 import authRoutes from "./modules/auth/auth.route";
 import prisma from "./utils/prisma";
 import "dotenv/config"
 import { lookupStudentByEnrollmentNumber } from "./modules/auth/auth.service";
 
-const app = express();
+const app: Express = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -17,3 +17,5 @@ app.get("/healthcheck", async (req, res) => {
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+app.use("/auth", authRoutes);
