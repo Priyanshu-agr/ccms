@@ -1,9 +1,7 @@
 import express from "express";
 import authRoutes from "./modules/auth/auth.route";
 import eventRoutes from "./modules/events/event.route";
-import prisma from "./utils/prisma";
 import "dotenv/config"
-import { lookupStudentByEnrollmentNumber } from "./modules/auth/auth.service";
 
 const app = express();
 app.use(express.json());

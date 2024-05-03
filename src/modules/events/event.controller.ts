@@ -1,8 +1,9 @@
+import { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const allEvents = async (req: any, res: any) => {
+export const allEvents = async (req: Request, res: Response) => {
     try {
         const events = await prisma.event.findMany();
         res.status(200).json({
@@ -18,12 +19,12 @@ export const allEvents = async (req: any, res: any) => {
     }
 };
 
-export const singleEvent = async (req: any, res: any) => {
+export const singleEvent = async (req: Request, res: Response) => {
     try {
-        const { eventId } = req.params();
+        const { eventId } = req.params;
         const event = await prisma.event.findUnique({
             where: {
-                event_id: eventId
+                event_id: parseInt(eventId)
             }
         });
         res.status(200).json({
@@ -39,7 +40,7 @@ export const singleEvent = async (req: any, res: any) => {
     }
 };
 
-export const createEvent = async (req: any, res: any) => {
+export const createEvent = async (req: Request, res: Response) => {
     try {
         const event = await prisma.event.create({
             data: req.body
@@ -57,12 +58,12 @@ export const createEvent = async (req: any, res: any) => {
     }
 };
 
-export const updateEvent = async (req: any, res: any) => {
+export const updateEvent = async (req: Request, res: Response) => {
     try {
-        const { eventId } = req.params();
+        const { eventId } = req.params;
         const event = await prisma.event.update({
             where: {
-                event_id: eventId
+                event_id: parseInt(eventId)
             },
             data: req.body
         });
@@ -79,12 +80,12 @@ export const updateEvent = async (req: any, res: any) => {
     }
 };
 
-export const deleteEvent = async (req: any, res: any) => {
+export const deleteEvent = async (req: Request, res: Response) => {
     try {
-        const { eventId } = req.params();
+        const { eventId } = req.params;
         const event = await prisma.event.delete({
             where: {
-                event_id: eventId
+                event_id: parseInt(eventId)
             }
         });
         res.status(200).json({
