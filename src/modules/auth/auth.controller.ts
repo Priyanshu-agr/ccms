@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { EnrollmentNumberAuthSchemaInput, StudentLoginAuthSchemaInput, StudentSignupAuthSchemaInput } from "./auth.schema";
 import { lookupStudentByEnrollmentNumber, studentLoginUsingEmailPassword, generateAccessToken, generateHashedPassword, studentSignupUsingEmailPassword, passwordCheck, verifyAccessToken, studentMailVerified } from "./auth.service";
 import mailer from "../../utils/mailer";
 

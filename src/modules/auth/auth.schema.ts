@@ -20,7 +20,10 @@ const studentMailVerifyAuthSchema = z.object({
     enrollmentNumber: z.string().length(9)
 })
 
-export type EnrollmentNumberAuthSchemaInput = z.infer<typeof enrollmentNumberAuthSchema>;
-export type StudentLoginAuthSchemaInput = z.infer<typeof studentLoginAuthSchema>;
-export type StudentSignupAuthSchemaInput = z.infer<typeof studentSignupAuthSchema>;
-export type StudentMailVerifyAuthSchemaInput = z.infer<typeof studentMailVerifyAuthSchema>;
+export {
+    enrollmentNumberAuthSchema,
+    studentLoginAuthSchema,
+    studentSignupAuthSchema,
+    studentMailVerifyAuthSchema
+
+}
