@@ -78,7 +78,16 @@ async function authStudentLoginHandler(
                 success: true,
                 body: {
                     message: 'Student login successful',
-                    token: accessToken
+                    token: accessToken,
+                    student: {
+                        enrollmentNumber: student.enrollment_number,
+                        email: student.cis_id,
+                        first_name: student.first_name,
+                        last_name: student.last_name,
+                        credits: student.credits,
+                        in_club_as_team: student.in_club_as_team,
+                        in_club_as_member: student.in_club_as_member
+                    }
                 }
             });
             return;
@@ -148,7 +157,16 @@ async function authStudentSignupHandler(
             success: true,
             body: {
                 message: 'Student signup successful',
-                token: accessToken
+                token: accessToken,
+                student: {
+                    enrollmentNumber: student.enrollment_number,
+                    email: student.cis_id,
+                    first_name: student.first_name,
+                    last_name: student.last_name,
+                    credits: student.credits,
+                    in_club_as_team: student.in_club_as_team,
+                    in_club_as_member: student.in_club_as_member
+                }
             }
         });
     } catch (error) {
