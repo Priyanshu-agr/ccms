@@ -5,7 +5,22 @@ const prisma = new PrismaClient();
 
 export const allEvents = async (req: Request, res: Response) => {
     try {
-        const events = await prisma.event.findMany();
+        const events = await prisma.event.findMany({
+            include: {
+                clubs: {
+                    select: {
+                        club_name: true
+                    }
+                },
+                student: {
+                    select: {
+                        first_name: true,
+                        last_name: true,
+                    }
+                }
+            }
+        });
+
         res.status(200).json({
             status: true, body: {
                 message: "All events fetched successfully",
@@ -27,6 +42,7 @@ export const singleEvent = async (req: Request, res: Response) => {
                 event_id: parseInt(eventId)
             }
         });
+
         res.status(200).json({
             status: true, body: {
                 message: "Event data fetched successfully",
@@ -42,7 +58,6 @@ export const singleEvent = async (req: Request, res: Response) => {
 
 export const createEvent = async (req: Request, res: Response) => {
     try {
-        console.log(req.body);  
         const event = await prisma.event.create({
             data: req.body
         });
