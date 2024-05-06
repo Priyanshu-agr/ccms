@@ -29,4 +29,23 @@ async function deleteClub(clubId: number) {
   });
 }
 
-export { getAllClubs, getClubById, createClub, updateClub, deleteClub };
+async function getClubDetailsWithEvents(clubId: number) {
+    const events = await prisma.event.findMany({
+        where: {
+            club_id: clubId
+        }
+    });
+    
+    const club = await prisma.club.findUnique({
+        where: {
+            club_id: clubId
+        }
+    });
+
+    return {
+        club,
+        events
+    }
+}
+
+export { getAllClubs, getClubById, createClub, updateClub, deleteClub, getClubDetailsWithEvents };
