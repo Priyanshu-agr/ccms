@@ -156,10 +156,23 @@ export const deleteEvent = async (req: Request, res: Response) => {
 export const enrollInEvent = async (req: Request, res: Response) => {
     try {
         const { studentId } = req.body;
-
+        const { eventId } = req.params; 
+        const enrollment = await prisma.attendance.create({
+            data: {
+                event_id: parseInt(eventId),
+                enrollment_number: studentId,
+                checked_in:false
+            }
+        });
+        res.status(200).json({
+            status: true, body: {
+                message: "User enrolled in event successfully",
+                data: enrollment
+            }
+        });
     }
     catch (err: any) {
         console.log(err);
         res.status(500).json({ status: false, error: err.message });
     }
-}
+};
