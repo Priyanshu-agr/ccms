@@ -18,6 +18,9 @@ export const allEvents = async (req: Request, res: Response) => {
                         last_name: true,
                     }
                 }
+            },
+            orderBy: {
+                event_date: 'desc'
             }
         });
 
@@ -30,7 +33,7 @@ export const allEvents = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         console.log(err);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ status: false, error: err.message });
     }
 };
 
@@ -59,7 +62,7 @@ export const singleEvent = async (req: Request, res: Response) => {
                         enrollment_number: true
                     }
                 },
-                speakers:true       
+                speakers: true
             }
         });
 
@@ -72,14 +75,27 @@ export const singleEvent = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         console.log(err);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ status: false, error: err.message });
     }
 };
 
 export const createEvent = async (req: Request, res: Response) => {
     try {
         const event = await prisma.event.create({
-            data: req.body
+            data: req.body,
+            include: {
+                clubs: {
+                    select: {
+                        club_name: true
+                    }
+                },
+                student: {
+                    select: {
+                        first_name: true,
+                        last_name: true,
+                    }
+                }
+            }
         });
         res.status(200).json({
             status: true, body: {
@@ -90,7 +106,7 @@ export const createEvent = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         console.log(err);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ status: false, error: err.message });
     }
 };
 
@@ -112,7 +128,7 @@ export const updateEvent = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         console.log(err);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ status: false, error: err.message });
     }
 };
 
@@ -133,6 +149,17 @@ export const deleteEvent = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         console.log(err);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ status: false, error: err.message });
     }
 };
+
+export const enrollInEvent = async (req: Request, res: Response) => {
+    try {
+        const { studentId } = req.body;
+
+    }
+    catch (err: any) {
+        console.log(err);
+        res.status(500).json({ status: false, error: err.message });
+    }
+}
