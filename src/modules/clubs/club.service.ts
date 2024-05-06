@@ -30,22 +30,40 @@ async function deleteClub(clubId: number) {
 }
 
 async function getClubDetailsWithEvents(clubId: number) {
-    const events = await prisma.event.findMany({
-        where: {
-            club_id: clubId
-        }
-    });
-    
     const club = await prisma.club.findUnique({
         where: {
             club_id: clubId
+        },
+        include: {
+            students_clubs_club_presidentTostudents: {
+                select: {
+                    first_name: true,
+                    last_name: true
+                }
+            },
+            students_clubs_club_vice_presidentTostudents: {
+                select: {
+                    first_name: true,
+                    last_name: true
+                }
+            },
+            students_clubs_club_secretaryTostudents: {
+                select: {
+                    first_name: true,
+                    last_name: true
+                }
+            },
+            students_clubs_club_treasurerTostudents: {
+                select: {
+                    first_name: true,
+                    last_name: true
+                }
+            },
+            events: true
         }
     });
 
-    return {
-        club,
-        events
-    }
+    return club;
 }
 
 export { getAllClubs, getClubById, createClub, updateClub, deleteClub, getClubDetailsWithEvents };

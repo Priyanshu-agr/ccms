@@ -57,15 +57,13 @@ export const deleteClub = async (req: Request, res: Response) => {
 export async function getClubDetailsWithEvents(request: Request, response: Response) {
   try {
     const { clubId } = request.params;
-    const data = await clubService.getClubDetailsWithEvents(parseInt(clubId));
+    const club = await clubService.getClubDetailsWithEvents(parseInt(clubId));
     response.status(200).send(
       {
         success: true,
         body: {
           message: "Club details with events fetched successfully",
-          data: {
-            ...data
-          }
+          club
         }
       }
     );
