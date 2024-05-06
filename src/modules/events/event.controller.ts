@@ -40,6 +40,26 @@ export const singleEvent = async (req: Request, res: Response) => {
         const event = await prisma.event.findUnique({
             where: {
                 event_id: parseInt(eventId)
+            },
+            include: {
+                clubs: {
+                    select: {
+                        club_name: true
+                    }
+                },
+                student: {
+                    select: {
+                        first_name: true,
+                        last_name: true,
+
+                    }
+                },
+                attendance: {
+                    select: {
+                        enrollment_number: true
+                    }
+                },
+                speakers:true       
             }
         });
 
