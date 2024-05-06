@@ -8,5 +8,6 @@ router.get("/:clubId", clubController.getClubById);
 router.post("/", clubController.createClub);
 router.put("/:clubId", clubController.updateClub);
 router.delete("/:clubId", clubController.deleteClub);
+router.get("/:clubId/details", clubController.getClubDetailsWithEvents);
 
 export default router;
