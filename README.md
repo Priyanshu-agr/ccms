@@ -1,11 +1,23 @@
-yarn add typescript
+# Common Club Management System Backend
 
-npx tsc --init
+A single application to manage activities of all clubs in an educational       institution.
 
-yarn add ts-node-dev typescript @types/node --dev
+## Tech Stack
 
-"scripts":{
-    "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts"
-  },
+- Expres
+- Typescript
+- PostgreSQL
+- Prisma
 
-npx prisma init --datasource-provider postgresql
+## Steps to run the code
+
+``` 
+  npm i
+
+  npx prisma init
+
+  npx tsc --init
+
+  npm run dev
+
+```
