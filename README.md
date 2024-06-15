@@ -12,6 +12,10 @@ A single application to manage activities of all clubs in an educational       i
 ## Steps to run the code
 
 ``` 
+  git clone https://github.com/Priyanshu-agr/ccms.git
+
+  cd ccms
+  
   npm i
 
   npx prisma init
